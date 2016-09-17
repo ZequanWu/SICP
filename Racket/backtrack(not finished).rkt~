@@ -1,0 +1,30 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |backtrack(not finished)|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(require 2htdp/abstraction)
+(define (neighbors n g)
+  (local ((define x (for/or ((l g))
+                      (cond
+                        [(empty? (rest l)) false]
+                        [(symbol=? (first l) n) (rest l)]
+                        [else false]))))
+    (if (equal? false x)
+        '()
+        x)))
+
+(define (find-path/list lo-os D G)
+  (cond
+    [(empty? lo-os) false]
+    [else (local ((define candicate (find-path (first lo-os D G))))
+            (cond
+              [(boolean? candicate) (find-path/list (rest lo-os) D G)]
+              [else candicate]))]))
+
+(define (find-path origination destination G)
+  (cond
+    [(symbol=? origination destination) (list destination)]
+    [else (local ((define next (neighbors origination G))
+                  (define candicate (find-path/list next destination G)))
+            (cond
+              [(boolean? candicate) false]
+              [else (cons origination candicate)]))]))
