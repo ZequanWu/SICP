@@ -9,3 +9,7 @@
       guess
       (sqrt-iter (improve guess x)
                  x)))
+;; start with guess as 1:
+;; (define (sqrt x)
+;;   (sqrt-iter 1 x))
+
