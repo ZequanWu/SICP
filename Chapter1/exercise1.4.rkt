@@ -18,7 +18,7 @@
                      x)))
 ;; Because applicative-order evaluation is actually used,
 ;; the "new-if" procedure will actually evaluate its 3 arguments before its body is evaluated.
-;; Therefore, the "sqrt-iter" will call itself forever.
+;; Therefore, infinite recursion will occur due to else-clause part call itself forever.
 ;; (sqrt-iter (improve guess x)
 ;;            x)))
 ;; this part will call itself forever.
