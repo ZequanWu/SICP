@@ -14,3 +14,18 @@
 (define (sqrt x)
   (sqrt-iter 1 (* x 1.0)))
 
+
+;; sqrt version 2: all helper functions are inside sqrt-v2
+;; This is block structure.
+(define (sqrt-v2 x)
+  (define (square x) (* x x))
+  (define (average x y) (/ (+ x y) 2))
+  (define (good-enough? guess)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1))
