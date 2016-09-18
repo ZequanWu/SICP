@@ -13,4 +13,4 @@
                  (improve new-guess x)
                  x)))
 (define (sqrt x)
-  (sqrt-iter x 1.0 (* x 1.0)))
+  (sqrt-iter x 1 (* x 1.0)))
