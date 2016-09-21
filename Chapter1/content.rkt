@@ -78,9 +78,9 @@
                        (- kinds-of-coints 1)))]))
   (cc amount 5))
 
-;; iterative process
-(define (count-change2 amount)
-  (define (cc amount kinds-of-coints n)
-    (if (= amount 0)
-        n
-        (cc amount
+;; iterative process (I don't know!!!)
+;; (define (count-change2 amount)
+;;   (define (cc amount kinds-of-coints n)
+;;     (if (= amount 0)
+;;         n
+;;         (cc amount
