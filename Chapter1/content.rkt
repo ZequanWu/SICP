@@ -43,3 +43,44 @@
         (iter (* counter product)
               (+ counter 1))))
   (iter 1 1))
+
+;; fibonacci numbers (tree-recursive process)
+(define (fib n)
+  (cond [(= n 0) 0]
+        [(= n 1) 1]
+        [else (+ (fib (- n 1))
+                 (fib (- n 2)))]))
+
+;; iterative process
+(define (fib2 n)
+  (define (fib-iter a b count)
+    (if (= count 0)
+        b
+        (fib-iter (+ a b) a (- count 1))))
+  (fib-iter 1 0 n))
+
+;; count change (tree-recursive process)
+(define (first-denomination kinds-of-coins)
+  (cond [(= kinds-of-coins 1) 1]
+        [(= kinds-of-coins 2) 5]
+        [(= kinds-of-coins 3) 10]
+        [(= kinds-of-coins 4) 25]
+        [(= kinds-of-coins 5) 50]))
+
+(define (count-change amount)
+  (define (cc amount kinds-of-coints)
+    (cond [(= amount 0) 1]
+          [(or (< amount 0) (= kinds-of-coins 0)) 0]
+          [else (+ (cc (- amount
+                          (first-denomination kinds-of-coints))
+                       (kinds-of-coints))
+                   (cc amount
+                       (- kinds-of-coints 1)))]))
+  (cc amount 5))
+
+;; iterative process
+(define (count-change2 amount)
+  (define (cc amount kinds-of-coints n)
+    (if (= amount 0)
+        n
+        (cc amount
