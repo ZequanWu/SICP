@@ -68,19 +68,33 @@
         [(= kinds-of-coins 5) 50]))
 
 (define (count-change amount)
-  (define (cc amount kinds-of-coints)
+  (define (cc amount kinds-of-coins)
     (cond [(= amount 0) 1]
           [(or (< amount 0) (= kinds-of-coins 0)) 0]
           [else (+ (cc (- amount
-                          (first-denomination kinds-of-coints))
-                       (kinds-of-coints))
+                          (first-denomination kinds-of-coins))
+                       (kinds-of-coins))
                    (cc amount
-                       (- kinds-of-coints 1)))]))
+                       (- kinds-of-coins 1)))]))
   (cc amount 5))
 
-;; iterative process (I don't know!!!)
-;; (define (count-change2 amount)
-;;   (define (cc amount kinds-of-coints n)
-;;     (if (= amount 0)
-;;         n
-;;         (cc amount
+;; exponentiation
+;; linear recursive process
+(define (expt b n)
+  (if (= n 0)
+      1
+      (* b (expt b (- n 1)))))
+
+;; linear iteration
+(define (expt2 b n)
+  (define (exp-iter counter product)
+    (if (= counter 0)
+        product
+        (exp-iter (- counter 1)
+                  (* b product))))
+  (exp-iter n 1))
+
+(define (fast-exp b n)
+  (cond [(= n 0) 1]
+        [(even? n) (square (fast-exp b (/ n 2)))]
+        [else (* b (fast-exp b (- n 1)))]))
